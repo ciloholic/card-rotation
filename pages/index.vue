@@ -1,8 +1,8 @@
 <template>
   <main>
-    <ul>
-      <li v-for="card in cards" :key="card.id" :class="card.class">{{ card.text }}-{{ card.id }}</li>
-    </ul>
+    <transition-group name="card-block" tag="ul">
+      <li v-for="card in cards" :key="card.id" :class="card.class" :style="{ background: card.color }">{{ card.text }}</li>
+    </transition-group>
   </main>
 </template>
 
@@ -11,14 +11,15 @@ export default {
   data: () => {
     return {
       cards: [
-        { id: 1, text: 'text', class: 'card01' },
-        { id: 2, text: 'text', class: 'card02' },
-        { id: 3, text: 'text', class: 'card03' },
-        { id: 4, text: 'text', class: 'card04' },
-        { id: 5, text: 'text', class: 'card05' },
-        { id: 6, text: 'text', class: 'card06' },
-        { id: 7, text: 'text', class: 'card07' },
-        { id: 8, text: 'text', class: 'card08' }
+        { id: 1, class: 'card01', color: '#e8aeb7', text: 'text-01' },
+        { id: 2, class: 'card02', color: '#b8e1ff', text: 'text-02' },
+        { id: 3, class: 'card03', color: '#a9fff7', text: 'text-03' },
+        { id: 4, class: 'card04', color: '#94fbab', text: 'text-04' },
+        { id: 5, class: 'card05', color: '#82aba1', text: 'text-05' },
+        { id: 6, class: 'card06', color: '#f9a03f', text: 'text-06' },
+        { id: 7, class: 'card07', color: '#f7d488', text: 'text-07' },
+        { id: 8, class: 'card08', color: '#eaefb1', text: 'text-08' },
+        { id: 9, class: '', color: '', text: '周りが回る' }
       ],
       orders: {
         card01: 'card02',
@@ -34,15 +35,10 @@ export default {
   },
   created() {
     setInterval(() => {
-      this.changeClass()
-    }, 5000)
-  },
-  methods: {
-    changeClass() {
       _.each(this.cards, card => {
         card.class = this.orders[card.class]
       })
-    }
+    }, 5000)
   }
 }
 </script>
@@ -58,8 +54,8 @@ ul {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-gap: 10px;
   grid-template-areas:
     'card01 card02 card03'
@@ -68,11 +64,14 @@ ul {
 
   li {
     list-style: none;
-    background-color: #eee;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .card-block-move {
+    transition: transform 1s;
   }
 
   .card01 {
