@@ -38,7 +38,7 @@ export default {
       _.each(this.cards, card => {
         card.class = this.orders[card.class]
       })
-    }, 5000)
+    }, 2000)
   }
 }
 </script>
@@ -59,13 +59,12 @@ ul {
   grid-gap: 10px;
   grid-template-areas:
     'card01 card02 card03'
-    'card04  skip  card05'
+    'card04 ...... card05'
     'card06 card07 card08';
 
   li {
     list-style: none;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
@@ -75,43 +74,27 @@ ul {
   }
 
   .card01 {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
     grid-area: card01;
   }
   .card02 {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
     grid-area: card02;
   }
   .card03 {
-    grid-column: 3 / 4;
-    grid-row: 1 / 2;
     grid-area: card03;
   }
   .card04 {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
     grid-area: card04;
   }
   .card05 {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
     grid-area: card05;
   }
   .card06 {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
     grid-area: card06;
   }
   .card07 {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
     grid-area: card07;
   }
   .card08 {
-    grid-column: 3 / 4;
-    grid-row: 3 / 4;
     grid-area: card08;
   }
 }
